@@ -13,6 +13,45 @@ function ProductImage({product}){return product.image_url?<img className="w-full
 
 
 
+
+const playPop = () => {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(600, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.1);
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.1);
+  } catch(e) {}
+};
+
+const playSuccess = () => {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const playNote = (freq, startTime, duration) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.1, startTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    };
+    playNote(523.25, ctx.currentTime, 0.2);
+    playNote(659.25, ctx.currentTime + 0.1, 0.2);
+    playNote(783.99, ctx.currentTime + 0.2, 0.4);
+  } catch(e) {}
+};
+
 export default function Kiosk(){
  const [settings,setSettings]=useState(null),[products,setProducts]=useState([]),[error,setError]=useState(''),[page,setPage]=useState(0),[now,setNow]=useState(Date.now());
  const [cart,setCart]=useState(()=>{const saved=read('vending-cart',{});return Date.now()-(saved.updated||0)<60000&&Array.isArray(saved.items)?saved.items:[];});
@@ -27,7 +66,7 @@ export default function Kiosk(){
  useEffect(()=>{
   if(!features.animations||asleep||order?.status!=='success'||celebrated.current.has(order.id))return;
   celebrated.current.add(order.id);
-  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)setCelebration(order.id); },[order?.id,order?.status,asleep,features.animations]);
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)setCelebration(order.id); playSuccess(); },[order?.id,order?.status,asleep,features.animations]);
  useEffect(()=>{if(!celebration)return;const timer=setTimeout(()=>setCelebration(null),2000);return()=>clearTimeout(timer);},[celebration]);
  const lastTouch=useRef(Date.now());const t={...defaultText,...settings?.ui_text_json};
  const refresh=useCallback(async()=>{const [s,p]=await Promise.all([request('/settings'),request('/products')]);setSettings(s);setProducts(p);},[]);
@@ -67,7 +106,7 @@ export default function Kiosk(){
  const open=p=>{if(!features.ordering||!p.stock||session)return; setSelected(p);setQty(1);};
  const selectedInCart=cart.find(i=>i.product_id===selected?.id)?.qty||0;
  const available=selected?Math.min(selected.stock-selectedInCart,10-selectedInCart,20-count):0;
- function add(){if(!features.ordering||qty>available||qty<1)return; const source=quantityImage.current?.getBoundingClientRect(),target=cartTarget.current?.getBoundingClientRect();
+ function add(){if(!features.ordering||qty>available||qty<1)return; playPop(); const source=quantityImage.current?.getBoundingClientRect(),target=cartTarget.current?.getBoundingClientRect();
   if(features.animations&&source&&target&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
    const x=source.left+source.width/2-32,y=source.top+source.height/2-32;
    setFlight({id:crypto.randomUUID(),product:selected,x,y,dx:target.left+target.width/2-32-x,dy:target.top+target.height/2-32-y});
