@@ -53,6 +53,14 @@ const playSuccess = () => {
 };
 
 export default function Kiosk(){
+ useEffect(()=>{
+  const audio = document.getElementById('bg-music');
+  if (!audio) return;
+  audio.volume = 0.25;
+  const playAudio = () => { if (audio.paused) audio.play().catch(()=>{}); };
+  window.addEventListener('pointerdown', playAudio, { once: true });
+  return () => window.removeEventListener('pointerdown', playAudio);
+ }, []);
  const [settings,setSettings]=useState(null),[products,setProducts]=useState([]),[error,setError]=useState(''),[page,setPage]=useState(0),[now,setNow]=useState(Date.now());
  const [cart,setCart]=useState(()=>{const saved=read('vending-cart',{});return Date.now()-(saved.updated||0)<60000&&Array.isArray(saved.items)?saved.items:[];});
  const [selected,setSelected]=useState(null),[qty,setQty]=useState(1),[checkout,setCheckout]=useState(false),[asleep,setAsleep]=useState(false);
@@ -118,6 +126,7 @@ setCart(c=>c.some(i=>i.product_id===selected.id)?c.map(i=>i.product_id===selecte
  function finish(){setSession(null);setOrder(null);setCart([]);setCheckout(false);setError('');lastTouch.current=Date.now();refresh().catch(()=>{});}
  const clock=settings?new Intl.DateTimeFormat('en-GB',{timeZone:settings.timezone,hour:'2-digit',minute:'2-digit'}).format(now):'—';
  return <main className={`kiosk kiosk-spatial${asleep?' is-asleep':''}${features.animations?'':' motion-disabled'}${features.slot_labels?'':' slots-hidden'}`} style={{'--columns':columns,'--rows':products.length<=columns?1:rows}}>
+  <audio id="bg-music" src="/cute-theme.mp3" loop preload="auto" />
   <div className="spatial-scene" aria-hidden="true"><div className="spatial-grid"/><div className="spatial-orbit"><i/><i/><i/></div></div>
   <header className="k-header"><div className="k-brand">{settings?.store_logo?<img src={settings.store_logo} alt={t.store_name}/>:<div className="k-brand-mark"><Box/></div>}<div><strong>{t.store_name}</strong><small>SELF-SERVICE / REIMAGINED</small></div></div><div className="k-clock">{settings?.demo_payments&&<span className="demo-pill">{t.demo_mode}</span>}{features.clock&&<time>{clock}</time>}</div></header>
   <section className="k-intro"><div><p><span className="spatial-dot"/>SELECT. TAP. ENJOY.</p><h1>{t.headline}</h1><div className="k-description">{t.subtitle}</div></div><div className="spatial-emblem" aria-hidden="true"><Layers/><span>EVERYDAY<br/>UPGRADED.</span></div></section>
