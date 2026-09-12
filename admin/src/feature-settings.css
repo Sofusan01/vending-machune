@@ -1,0 +1,11 @@
+.feature-settings fieldset {border:1px solid #d5ddcf;border-radius:14px;margin:18px 0;padding:4px 16px}
+.feature-settings legend {font-size:14px;font-weight:700;padding:0 6px}
+.feature-settings .feature-toggle {display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:20px;padding:12px 0;margin:0;border-bottom:1px solid #e3e8df;cursor:pointer}
+.feature-settings .feature-toggle:last-child {border:0}
+.feature-toggle strong {font-size:14px;font-weight:600}
+.feature-toggle small {font-size:12px;color:#65715e;line-height:1.5;margin-top:4px}
+.feature-settings .feature-toggle input {appearance:none;width:48px;min-width:48px;height:28px;min-height:28px;padding:0;border:1px solid #8c9885;border-radius:20px;background:#c6cfc0;cursor:pointer;position:relative}
+.feature-settings .feature-toggle input::after {content:'';position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:white;box-shadow:0 1px 3px #0003;transition:transform .15s}
+.feature-settings .feature-toggle input:checked {background:#456336;border-color:#456336}
+.feature-settings .feature-toggle input:checked::after {transform:translateX(20px)}
+.feature-settings .feature-toggle input:focus-visible {outline:3px solid #8aa76c;outline-offset:3px}

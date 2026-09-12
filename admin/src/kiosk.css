@@ -1,0 +1,129 @@
+/* Spatial kiosk: CSS surfaces stay sharp at native display resolution. */
+.kiosk-spatial.motion-disabled *,.kiosk-spatial.motion-disabled *::before,.kiosk-spatial.motion-disabled *::after {animation:none!important;transition:none!important}
+.kiosk-spatial.slots-hidden .k-slot {display:none}
+.kiosk.kiosk-spatial {
+  --space-ink:#17201e; --space-muted:#626c67; --space-line:#d2d8d2; --space-accent:#d5f58a;
+  position:relative;isolation:isolate;background:#edf0eb;color:var(--space-ink);
+  padding:clamp(16px,3vw,48px);gap:clamp(10px,1.8vh,22px);font-family:Inter,'Segoe UI',Tahoma,sans-serif;
+}
+.kiosk-spatial .spatial-scene {position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at 70% 25%,#fff 0%,transparent 65%)}
+.kiosk-spatial .spatial-grid {position:absolute;inset:50% -50% -80%;background-image:linear-gradient(#73887514 1px,transparent 1px),linear-gradient(90deg,#73887514 1px,transparent 1px);background-size:64px 64px;transform:perspective(600px) rotateX(60deg);mask-image:linear-gradient(transparent,#000)}
+.kiosk-spatial .spatial-orbit {position:absolute;right:-140px;top:5%;width:480px;height:480px;perspective:900px;opacity:.45;animation:spatial-orbit-drift 18s ease-in-out infinite alternate}
+.kiosk-spatial .spatial-orbit i {position:absolute;inset:0;border:1px solid #87998455;border-radius:50%;transform:rotateX(60deg) rotateY(-25deg);box-shadow:inset 0 2px 2px #fff,0 2px 2px #8c9f8612}
+.kiosk-spatial .spatial-orbit i:nth-child(2) {inset:30px;transform:rotateX(50deg) rotateY(35deg)}
+.kiosk-spatial .spatial-orbit i:nth-child(3) {inset:65px;transform:rotateX(20deg) rotateY(60deg)}
+.kiosk.kiosk-spatial .k-header {color:var(--space-ink);border-bottom:1px solid var(--space-line);padding-bottom:16px;min-height:60px}
+.kiosk.kiosk-spatial .k-brand {color:var(--space-ink);gap:12px;max-width:70%;font-size:clamp(12px,1.4vw,20px);letter-spacing:-.04em}
+.kiosk-spatial .k-brand strong {display:block;line-height:1.15}
+.kiosk-spatial .k-brand small {font-size:9px;letter-spacing:.18em;color:var(--space-muted);margin-top:6px;font-weight:500}
+.kiosk-spatial .k-brand>img {width:42px;height:42px;filter:drop-shadow(0 2px 2px #17201e15)}
+.kiosk-spatial .k-brand-mark {background:var(--space-ink);color:var(--space-accent);border-radius:12px;padding:10px}
+.kiosk-spatial .k-clock {font-size:13px;gap:12px;color:var(--space-muted);letter-spacing:.04em}
+.kiosk-spatial .demo-pill {border:1px solid #c9d0c5;background:#e3e9dc;color:#47533d;font-size:10px;padding:5px 8px}
+.kiosk.kiosk-spatial .k-intro {padding:clamp(8px,2vh,24px) 0;color:var(--space-ink);align-items:center;gap:20px}
+.kiosk.kiosk-spatial .k-intro p {display:flex;gap:9px;color:#59634f;font-size:10px;letter-spacing:.2em;font-weight:650;margin-bottom:12px}
+.spatial-dot {width:6px;height:6px;border-radius:50%;background:#61793a;box-shadow:0 0 0 4px #91ac6720}
+.kiosk.kiosk-spatial .k-intro h1 {font-size:clamp(28px,4vw,60px);max-width:760px;line-height:1.03;letter-spacing:-.065em;font-weight:650;color:var(--space-ink);text-wrap:balance}
+.kiosk-spatial .k-description {color:var(--space-muted);font-size:clamp(11px,1.1vw,15px);margin-top:12px}
+.spatial-emblem {display:flex;align-items:center;gap:14px;flex-shrink:0;color:#7b8877}
+.spatial-emblem svg {width:54px;height:54px;stroke-width:.8;transform:rotate(-12deg);filter:drop-shadow(5px 8px 2px #51654820)}
+.spatial-emblem span {font-size:9px;line-height:1.7;letter-spacing:.16em}
+.k-collection {display:flex;align-items:center;justify-content:space-between;flex-shrink:0;min-height:32px;border-top:1px solid var(--space-line);padding-top:12px}
+.k-collection>span {display:flex;align-items:center;gap:8px;font-size:10px;font-weight:650;letter-spacing:.14em}
+.k-collection b {font-size:9px;background:#dde3d9;padding:3px 6px;border-radius:5px;letter-spacing:0}
+.kiosk.kiosk-spatial .k-pagination {color:var(--space-muted);font-size:11px;font-variant-numeric:tabular-nums;gap:8px}
+.kiosk-spatial .k-pagination button {background:#ffffff70;border:1px solid var(--space-line);border-radius:10px;min-height:44px;min-width:44px;padding:8px;color:var(--space-ink)}
+.kiosk-spatial .k-product-grid {gap:clamp(12px,1.7vw,24px);min-height:100px;perspective:1200px;grid-template-columns:repeat(var(--columns),minmax(0,280px));justify-content:center;align-items:start}
+.kiosk.kiosk-spatial .k-product-grid .k-product {width:100%;height:100%;max-height:300px}
+.kiosk.kiosk-spatial .k-product {position:relative;padding:10px;gap:0;border:1px solid #fff;border-radius:22px;background:linear-gradient(145deg,#ffffffc9,#e2e7dfb3);box-shadow:0 2px 2px #28382905,0 12px 24px -16px #28382940,inset 0 -2px 1px #c7d0c555;backdrop-filter:none;overflow:hidden;color:var(--space-ink)}
+.kiosk.kiosk-spatial .k-product:hover:not(:disabled) {border-color:#a8bc91;box-shadow:0 12px 30px -14px #35472750,inset 0 1px #fff;background:linear-gradient(145deg,#fff,#e6eedf)}
+.kiosk-spatial .k-product:focus-visible,.kiosk-spatial button:focus-visible {outline:3px solid #577533;outline-offset:3px}
+.kiosk.kiosk-spatial .k-product-visual {position:relative;isolation:isolate;width:100%;flex:1;min-height:0;height:auto;border-radius:15px;overflow:hidden;padding:24px 12px 12px;background:radial-gradient(ellipse at 50% 28%,#fff,#e7ece300 70%);perspective:800px}
+.kiosk.kiosk-spatial .k-product-visual::after {display:none}
+.kiosk-spatial .k-slot {left:4px;top:3px;background:transparent;border:1px solid #b7c2b6;border-radius:6px;padding:4px 7px;color:#5c6857;font-size:10px;letter-spacing:.1em;z-index:3}
+.k-product-type {position:absolute;top:8px;right:8px;color:#687461;font-size:9px;letter-spacing:.12em;text-transform:uppercase;max-width:55%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kiosk-spatial .product-plinth {position:absolute;bottom:12%;left:15%;width:70%;height:18%;border-radius:50%;background:linear-gradient(180deg,#fafff6 0%,#e4ecd9 52%,#b2bea6 57%,#c6d1ba 90%);box-shadow:0 14px 12px -8px #52634445,0 2px 1px #fff,inset 0 2px 0 #fff;transform:rotate(-7deg);z-index:-1}
+.kiosk-spatial .product-plinth::before {content:'';position:absolute;inset:1px 3px 35%;border-radius:50%;background:radial-gradient(ellipse,#ebf3df,#fcfff8);border:1px solid #d3dfc8}
+.kiosk-spatial .spatial-product-image {display:flex;align-items:center;justify-content:center;width:100%;height:83%;position:relative;transform:translateY(-2%);animation:spatial-float 6s ease-in-out infinite}
+.kiosk-spatial .k-product:nth-child(even) .spatial-product-image {animation-delay:-3s}
+.kiosk-spatial .spatial-product-image img {width:85%;height:100%;max-width:360px;object-fit:contain;filter:drop-shadow(6px 14px 5px #38492c26)}
+.kiosk-spatial .single-product .k-product {justify-self:center}
+.kiosk-spatial .single-product .spatial-product-image img {max-width:200px}
+.kiosk-spatial .k-product-info {padding:12px 6px 4px;border-top:1px solid #cdd6c580;min-height:68px;align-items:center}
+.kiosk-spatial .k-product-info h2 {color:var(--space-ink);font-size:clamp(13px,1.25vw,19px);font-weight:600;letter-spacing:-.03em}
+.kiosk-spatial .k-product-info span:not(.k-plus) {color:#4c6140;font-size:clamp(14px,1.4vw,21px);font-weight:500;margin-top:4px}
+.kiosk-spatial .k-plus {display:grid;place-items:center;width:44px;height:44px;padding:0;border-radius:50%;border:1px solid #b9cda0;background:var(--space-accent);color:#293b19;box-shadow:0 3px 0 #afc77f;flex-shrink:0}
+.kiosk-spatial .sold-out {z-index:4;background:#f8faf2eb;color:#485143;border:1px solid #c4cdbd}
+.kiosk.kiosk-spatial .k-empty {color:var(--space-muted)}
+.kiosk.kiosk-spatial .k-cart {border:1px solid #38443d;border-radius:20px;background:linear-gradient(120deg,#253129,#17211c);box-shadow:0 10px 25px -12px #17201e65,inset 0 1px #ffffff16;color:#f4f7ee;padding:12px 16px;min-height:82px;gap:14px;backdrop-filter:none;margin-top:4px}
+.kiosk-spatial .cart-target {background:#364435;color:#d5f58a;border:1px solid #556549;border-radius:12px;width:44px;height:44px}
+.kiosk-spatial .cart-count {background:#d5f58a;border-color:#253129;color:#23311b}
+.kiosk-spatial .k-cart-label>svg {display:none}
+.kiosk-spatial .k-cart-label strong {color:#f3f6ed;font-size:12px;font-weight:500}
+.kiosk-spatial .k-cart-label small {color:#a4b09c;font-size:10px;margin-top:4px}
+.kiosk-spatial .k-cart .muted {color:#aab5a4;font-size:12px}
+.kiosk-spatial .cart-chip {background:#35432f;border:1px solid #4b5a44;border-radius:9px;font-size:12px}
+.kiosk-spatial .cart-chip button {color:#e8f4da}
+.kiosk.kiosk-spatial .k-primary,.app-modal.k-modal .k-primary {background:#d5f58a;color:#23311b;border:1px solid #bbd877;border-radius:12px;box-shadow:0 3px 0 #91aa5e;min-height:52px;padding:12px 20px;font-size:14px}
+.kiosk.kiosk-spatial .k-primary:hover:not(:disabled),.app-modal.k-modal .k-primary:hover:not(:disabled) {background:#e2ffa5;box-shadow:0 3px 0 #91aa5e}
+.kiosk-spatial .k-primary:disabled {opacity:1;filter:none;background:#3b4638;color:#aebba4;border-color:#53604c;box-shadow:none}
+.app-modal.k-modal {background:linear-gradient(145deg,#ffffff,#edf2e7);color:#17201e;border:1px solid #fff;border-radius:26px;box-shadow:0 30px 100px #07140950,inset 0 -3px #d3deca;padding:28px;width:min(92vw,480px)}
+.app-modal.k-modal::backdrop {background:#1521178c;backdrop-filter:blur(6px)}
+.app-modal.k-modal h2 {color:#17201e;font-weight:600;letter-spacing:-.04em}
+.app-modal.k-modal p {color:#5c6857;font-size:14px;line-height:1.6}
+.app-modal.k-modal .modal-x {color:#485840;z-index:1}
+.app-modal.k-modal .quantity-image {background:radial-gradient(ellipse at 50% 30%,#fff,#e1ead8);border:1px solid #d3ddca;border-radius:18px;height:clamp(110px,24vh,220px);padding:16px;box-shadow:inset 0 -8px 15px #73886312}
+.app-modal.k-modal .quantity-image img {filter:drop-shadow(5px 12px 4px #41582b30)}
+.app-modal.k-modal .quantity-controls {gap:28px;margin:22px 0}
+.app-modal.k-modal .quantity-controls button {border:1px solid #c4d1ba;border-radius:50%;background:#f8fbf3;color:#253a1b;width:48px;height:48px}
+.app-modal.k-modal .checkout-total {font-size:42px;color:#24351c;font-weight:500}
+.app-modal.k-modal .payment-options button {background:#f7faf2;border:1px solid #cbd7c2;min-height:66px;border-radius:14px;color:#293a21;box-shadow:0 3px 0 #d5dfcc}
+.app-modal.k-modal .payment-options button:first-child {background:#e5f6c8;border-color:#b9d397}
+.app-modal.k-modal .payment-options button svg:first-child {color:#506c37}
+.app-modal.k-modal .cash-instructions {background:#e6eedc;color:#52683d}
+.app-modal.k-modal .dispensing-icon {color:#607e3e}
+.app-modal.k-modal .success-heart {display:grid;place-items:center;width:96px;height:96px;margin:24px auto;border-radius:50%;background:linear-gradient(145deg,#ebffc7,#c3df98);color:#435e2b;border:1px solid #b4cc94;box-shadow:0 6px 0 #abc28b,0 16px 24px -10px #415d3b40}
+.app-modal.k-modal .secondary {background:#f5f8f0;border-color:#c8d5be;color:#3c5030}
+.kiosk-spatial .screensaver {background:radial-gradient(ellipse at 50% 35%,#fafff6,#e4eade);color:#17201e;gap:clamp(12px,3vh,32px);backdrop-filter:none}
+.kiosk-spatial .screensaver-brand {font-size:clamp(14px,2vw,24px);color:#23311b;letter-spacing:-.035em}
+.kiosk-spatial .screensaver-brand img {width:50px;height:50px}
+.screensaver-kicker {font-size:10px;letter-spacing:.22em;color:#66765a}
+.kiosk-spatial .screensaver h1 {color:#17201e;font-weight:600;font-size:clamp(32px,5vw,76px);max-width:900px;padding:0 20px}
+.kiosk-spatial .marquee-card,.kiosk-spatial .marquee-card:nth-child(even),.kiosk-spatial .marquee-card:nth-child(3n) {background:linear-gradient(145deg,#fff,#e2ebd8)!important;color:#27381d;border:1px solid #fff;border-radius:24px;box-shadow:0 16px 20px -12px #61734c55,0 3px 0 #cad6c0;transform:perspective(700px) rotateY(-10deg) rotateX(5deg)}
+.kiosk-spatial .marquee-card img {filter:drop-shadow(6px 12px 4px #3e57262b)}
+.kiosk-spatial .touch-prompt {background:#d5f58a;color:#24341a;border:1px solid #b5cc91;border-radius:16px;box-shadow:0 5px 0 #a4ba83;padding:18px 28px;font-size:clamp(16px,2vw,24px)}
+.kiosk-spatial.is-asleep .spatial-orbit,.kiosk-spatial.is-asleep .spatial-product-image {animation-play-state:paused}
+@keyframes spatial-float {0%,100%{transform:translateY(-2%) rotate(-2deg)}50%{transform:translateY(-6%) rotate(1deg)}}
+@keyframes spatial-orbit-drift {from{transform:translateY(-10px) rotate(-12deg)}to{transform:translateY(25px) rotate(15deg)}}
+@media(max-width:749px) {
+  .kiosk.kiosk-spatial {padding:16px;gap:12px}
+  .kiosk-spatial .spatial-emblem {display:none}
+  .kiosk-spatial .k-brand small {font-size:7px;letter-spacing:.12em}
+  .kiosk-spatial .k-clock {font-size:11px;gap:7px}
+  .kiosk-spatial .k-brand>img {width:34px;height:34px}
+  .kiosk.kiosk-spatial .k-intro {padding:10px 0}
+  .kiosk-spatial .k-description {max-width:90%}
+  .kiosk.kiosk-spatial .k-product {padding:8px;border-radius:18px}
+  .kiosk-spatial .k-product-info {padding:10px 2px 4px;gap:6px}
+  .kiosk-spatial .k-plus {width:44px;height:44px}
+  .kiosk-spatial .k-cart-label {display:none}
+  .kiosk.kiosk-spatial .k-cart {flex-wrap:wrap;padding:12px;gap:10px;border-radius:18px}
+  .kiosk-spatial .k-cart-items {width:auto;flex-basis:calc(100% - 64px);height:34px;font-size:11px}
+  .kiosk-spatial .k-cart>.k-primary {width:100%;justify-content:space-between;min-height:48px}
+  .kiosk-spatial .k-primary>span {display:inline;margin-left:auto}
+}
+@media(max-height:650px) {
+  .kiosk.kiosk-spatial {padding:12px 20px;gap:8px}
+  .kiosk.kiosk-spatial .k-header {min-height:42px;padding-bottom:8px}
+  .kiosk.kiosk-spatial .k-intro {padding:2px 0}
+  .kiosk.kiosk-spatial .k-intro h1 {font-size:28px}
+  .kiosk.kiosk-spatial .k-intro p {margin-bottom:5px;font-size:9px}
+  .kiosk-spatial .k-description,.kiosk-spatial .spatial-emblem {display:none}
+  .kiosk-spatial .k-collection {padding-top:6px;min-height:24px}
+  .kiosk-spatial .k-product-info {min-height:56px;padding:6px 2px}
+  .kiosk.kiosk-spatial .k-cart {min-height:62px;padding:8px 12px}
+  .kiosk-spatial .k-brand>img {height:30px;width:30px}
+}
+@media(prefers-reduced-motion:reduce) {
+  .kiosk-spatial .spatial-orbit,.kiosk-spatial .spatial-product-image {animation:none}
+}

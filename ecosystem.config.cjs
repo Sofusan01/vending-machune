@@ -1,0 +1,1 @@
+module.exports={apps:[{name:'vending',script:'server.js',cwd:__dirname,node_args:'--env-file=.env',instances:1,exec_mode:'fork',autorestart:true,exp_backoff_restart_delay:1000,kill_timeout:15000,max_memory_restart:'400M',time:true}]};
